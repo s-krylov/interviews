@@ -18,29 +18,17 @@ public class TransactionControllerTestSuit {
 
     @BeforeClass
     public static void setUp() {
-        t1 = new Transaction();
-        t1.setAmount(100);
-        t1.setType("phone");
+        t1 = new Transaction(100, "phone");
         MemoryStorage.getInstance().insert(1, t1);
 
-        t2 = new Transaction();
-        t2.setAmount(20);
-        t2.setType("internet");
-        t2.setParentId(1l);
+        t2 = new Transaction(1l, 20, "internet");
         MemoryStorage.getInstance().insert(2, t2);
 
-        t3 = new Transaction();
-        t3.setAmount(-5);
-        t3.setType("cashback");
-        t3.setParentId(2l);
+        t3 = new Transaction(2l, -5, "cashback");
         MemoryStorage.getInstance().insert(3, t3);
 
-        Transaction t4 = new Transaction();
-        t4.setAmount(-2);
-        t4.setType("cashback");
-        t4.setParentId(1l);
+        Transaction t4 = new Transaction(1l, -2, "cashback");
         MemoryStorage.getInstance().insert(4, t4);
-
     }
 
     @Test
@@ -70,7 +58,7 @@ public class TransactionControllerTestSuit {
     @Test
     public void testSave() {
         assertEquals("ok", TransactionController.save("5", "{\"parent_id\": 4, \"amount\": 300, \"type\": \"other\"}").get("result"));
-        assertEquals("error", TransactionController.save("5", "not a json").get("result"));
-
+        assertEquals("error", TransactionController.save("6", "not a json").get("result"));
+        assertEquals("error", TransactionController.save("7", "{\"amonnt\": \"20\", \"type\": \"qqq\", \"parent_id\": 2}").get("result"));
     }
 }

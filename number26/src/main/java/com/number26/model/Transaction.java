@@ -1,5 +1,6 @@
 package com.number26.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,6 +18,19 @@ public class Transaction {
     private Long parentId;
     private double amount;
     private String type;
+
+    @JsonCreator
+    public Transaction(@JsonProperty("parent_id") Long parentId,
+                       @JsonProperty(value = "amount", required = true) double amount,
+                       @JsonProperty(value = "type", required = true) String type) {
+        this.parentId = parentId;
+        this.amount = amount;
+        this.type = type;
+    }
+
+    public Transaction(double amount, String type) {
+        this(null, amount, type);
+    }
 
     public Long getParentId() {
         return parentId;
@@ -55,5 +69,14 @@ public class Transaction {
     @Override
     public int hashCode() {
         return Objects.hash(parentId, amount, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "parentId=" + parentId +
+                ", amount=" + amount +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
