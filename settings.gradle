@@ -1,2 +1,4 @@
-rootProject.name = 'goeuro'
+include 'goeuro'
+include 'number26'
+include 'luxoft'
 
