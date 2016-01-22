@@ -2,10 +2,15 @@ Given the supplied text file (INPUT.TXT), write a Java program that loads all wo
 
 Example:
 
+
 INPUT
+
 Platon made bamboo boats.
 
 OUTPUT
+
 ({a, o}, 6) -> 2.5
+
 ({a, o}, 5) -> 2
+
 ({a, e}, 4) -> 2
